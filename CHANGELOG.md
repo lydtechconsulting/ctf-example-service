@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.1] - 2022-05-24
+### Changed
+- Documentation.
+
 ## [1.0.0] - 2022-05-15
 ### Added
 - Uses component-test-framework.
