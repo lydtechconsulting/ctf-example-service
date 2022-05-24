@@ -9,4 +9,4 @@ spring:
         password: password
 
 ctfexample:
-    thirdpartyEndpoint: http://wiremock:8080/api/ctfexample/
+    thirdpartyEndpoint: http://wiremock:8080/api/thirdparty/

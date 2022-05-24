@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>dev.lydtech</groupId>
 	<artifactId>ctf-example-service</artifactId>
-	<version>1.0.2</version>
+	<version>1.1.0</version>
 	<name>ctf-example-service</name>
 	<description>Example service that showcases the component-test-framework for component testing</description>
 	<properties>
@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>dev.lydtech</groupId>
 			<artifactId>component-test-framework</artifactId>
-			<version>1.0.2</version>
+			<version>1.1.0</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -175,6 +175,10 @@
 								<debezium.enabled>true</debezium.enabled>
 								<debezium.port>8083</debezium.port>
 								<debezium.container.logging.enabled>false</debezium.container.logging.enabled>
+								<wiremock.enabled>true</wiremock.enabled>
+								<wiremock.image.tag>2.32.0</wiremock.image.tag>
+								<wiremock.port>8080</wiremock.port>
+								<wiremock.container.logging.enabled>false</wiremock.container.logging.enabled>
 							</systemPropertyVariables>
 						</configuration>
 					</plugin>

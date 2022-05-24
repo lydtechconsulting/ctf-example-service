@@ -11,6 +11,7 @@ import dev.lydtech.repository.OutboxEventRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -33,7 +34,7 @@ public class CtfExampleService {
      * Sends an outbound event in response to the received event.
      */
     public void process(String key, CtfExampleInboundEvent event) {
-//        callThirdparty(key);
+        callThirdparty(key);
         kafkaClient.sendMessage(key, event.getData());
     }
 
@@ -43,24 +44,29 @@ public class CtfExampleService {
      * This will be picked up by Kafka Connect and published to the topic.
      */
     public void processWithOutbox(String key, CtfExampleInboundEvent event) {
-//        callThirdparty(key);
+        callThirdparty(key);
         writeOutboxEvent(event.getData());
     }
 
+    /**
+     * Make a REST call to a third party service.
+     */
     private void callThirdparty(String key) {
         RestTemplate restTemplate = new RestTemplate();
         try {
-            ResponseEntity<String> response = restTemplate.getForEntity(properties.getThirdpartyEndpoint() + "/" + key, String.class);
-            if (response.getStatusCodeValue() != 200) {
-                throw new RuntimeException("error " + response.getStatusCodeValue());
+            ResponseEntity<String> response = restTemplate.getForEntity(properties.getThirdpartyEndpoint() + key, String.class);
+            if (!response.getStatusCode().equals(HttpStatus.OK)) {
+                throw new RuntimeException("Error: " + response.getStatusCode());
             }
-            return;
         } catch (Exception e) {
-            log.error("Error calling thirdparty api, returned an (" + e.getClass().getName() + ")", e);
+            log.error("Error calling thirdparty API", e);
             throw new CtfExampleException(e);
         }
     }
 
+    /**
+     * Write the event to the outbox table.
+     */
     private void writeOutboxEvent(String payload) {
         OutboxEvent outboxEvent = OutboxEvent.builder()
                 .version("v1")

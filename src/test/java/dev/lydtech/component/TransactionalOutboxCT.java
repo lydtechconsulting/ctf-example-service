@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import dev.lydtech.component.framework.client.debezium.DebeziumClient;
 import dev.lydtech.component.framework.client.kafka.KafkaClient;
+import dev.lydtech.component.framework.client.wiremock.RequestCriteria;
+import dev.lydtech.component.framework.client.wiremock.WiremockClient;
 import dev.lydtech.component.framework.extension.TestContainersSetupExtension;
 import dev.lydtech.component.framework.mapper.JsonMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -53,11 +55,13 @@ public class TransactionalOutboxCT {
     /**
      * An event is sent to the inbound topic that uses the transactional outbox for the service.
      *
-     * The service consumes the event and writes an outbox event to the database.
+     * The service consumes the event, calls a thirdparty API via REST, and writes an outbox event to the database.
      *
      * Debezium (Kafka Connect source connector) streams the database log write to the Kafka outbound topic.
      *
-     * The test consumes the event and asserts it is as expected.
+     * The test consumes the outbound event and asserts it is as expected.
+     *
+     * This test therefore verifies Kafka, Wiremock, Postgres and Debezium containers are working as required.
      */
     @Test
     public void testTransactionalOutbox() throws Exception {
@@ -67,5 +71,11 @@ public class TransactionalOutboxCT {
 
         List<ConsumerRecord<String, String>> outboundEvents = KafkaClient.getInstance().consumeAndAssert("testTransactionalOutbox", consumer, 1, 2);
         assertThat(outboundEvents.get(0).value(), containsString(INBOUND_DATA));
+
+        RequestCriteria request = RequestCriteria.builder()
+                .method("GET")
+                .url("/api/thirdparty/"+key)
+                .build();
+        WiremockClient.getInstance().countMatchingRequests(request, 1);
     }
 }

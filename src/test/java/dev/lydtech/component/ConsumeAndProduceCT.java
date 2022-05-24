@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 import dev.lydtech.component.framework.client.kafka.KafkaClient;
+import dev.lydtech.component.framework.client.wiremock.RequestCriteria;
+import dev.lydtech.component.framework.client.wiremock.WiremockClient;
 import dev.lydtech.component.framework.extension.TestContainersSetupExtension;
 import dev.lydtech.component.framework.mapper.JsonMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -36,8 +38,8 @@ public class ConsumeAndProduceCT {
 
     @BeforeEach
     public void setup() {
+        WiremockClient.getInstance().deleteAllRequestsMappings();
         consumer = KafkaClient.getInstance().createConsumer(GROUP_ID, OUTBOUND_TOPIC);
-
         // Clear the topic.
         consumer.poll(Duration.ofSeconds(1));
     }
@@ -50,9 +52,11 @@ public class ConsumeAndProduceCT {
     /**
      * An event is sent to the inbound topic for the service.
      *
-     * The service consumes the event and produces a resulting event.
+     * The service consumes the event, calls a thirdparty API via REST, and produces a resulting event.
      *
-     * The test consumes the event and asserts it is as expected.
+     * The test consumes the outbound event and asserts it is as expected.
+     *
+     * This test therefore verifies Kafka and Wiremock containers are working as required.
      */
     @Test
     public void testConsumeAndProduce() throws Exception {
@@ -62,5 +66,11 @@ public class ConsumeAndProduceCT {
 
         List<ConsumerRecord<String, String>> outboundEvents = KafkaClient.getInstance().consumeAndAssert("testConsumeAndProduce", consumer, 1, 2);
         assertThat(outboundEvents.get(0).value(), containsString(INBOUND_DATA));
+
+        RequestCriteria request = RequestCriteria.builder()
+                .method("GET")
+                .url("/api/thirdparty/"+key)
+                .build();
+        WiremockClient.getInstance().countMatchingRequests(request, 1);
     }
 }

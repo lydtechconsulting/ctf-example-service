@@ -29,6 +29,11 @@ Run tests:
 mvn test -Pcomponent
 ```
 
+Run tests leaving containers up:
+```
+mvn test -Pcomponent -Dcontainers.stayup
+```
+
 ## Debezium (Kafka Connect) Connector
 
 The Debezium Postgres source connector configuration is defined in `resources/connector/outbox-connector.json`.
