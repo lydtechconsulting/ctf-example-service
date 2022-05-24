@@ -1,0 +1,12 @@
+---
+kafka:
+    bootstrap-servers: kafka:9092
+
+spring:
+    datasource:
+        url: jdbc:postgresql://postgres-host:5432/postgres-db?currentSchema=ctf_example
+        username: user
+        password: password
+
+ctfexample:
+    thirdpartyEndpoint: http://wiremock:8080/api/ctfexample/

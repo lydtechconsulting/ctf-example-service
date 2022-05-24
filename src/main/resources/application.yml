@@ -1,0 +1,31 @@
+spring:
+    application:
+        name: ctf-example
+    datasource:
+        driverClassName: org.postgresql.Driver
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        properties:
+            hibernate:
+                default_schema: ctf_example
+        hibernate:
+            ddl-auto: validate
+        generate-ddl: false
+    data:
+        rest:
+            detection-strategy: annotated
+    flyway:
+        schemas: ctf_example
+
+kafka:
+    consumer:
+        # Default to 30 seconds
+        maxPollIntervalMs: 30000
+
+server:
+    port: 9001
+
+ctfexample:
+    thirdpartyEndpoint: https://ctf.example.com/api/thirdparty/
+    outboundTopic : "ctf-example-outbound-topic"
+    outboxOutboundTopic : "ctf-example-outbox-outbound-topic"
