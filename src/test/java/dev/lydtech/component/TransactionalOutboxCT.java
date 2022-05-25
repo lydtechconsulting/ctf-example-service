@@ -17,7 +17,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.ActiveProfiles;
 
 import static dev.lydtech.component.TestEventData.INBOUND_DATA;
 import static dev.lydtech.component.TestEventData.buildCtfExampleInboundEvent;
@@ -29,7 +28,6 @@ import static org.hamcrest.Matchers.containsString;
  */
 @Slf4j
 @ExtendWith(TestContainersSetupExtension.class)
-@ActiveProfiles("component-test")
 public class TransactionalOutboxCT {
 
     private static final String GROUP_ID = "TransactionalOutboxCT";
