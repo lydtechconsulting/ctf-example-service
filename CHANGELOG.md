@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.3.0] - 2022-05-28
+### Changed
+- Latest component-test-framework.
+
 ## [1.1.0] - 2022-05-24
 ### Added
 - Supports Wiremock.

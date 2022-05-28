@@ -10,6 +10,12 @@ This example application uses Kafka as the broker, Postgres as the database, and
 
 The service calls out to a third party service via REST.  This is represented by a standalone wiremock in the component tests.
 
+## Debezium (Kafka Connect) Connector
+
+The Debezium Postgres source connector configuration is defined in `resources/connector/outbox-connector.json`.
+
+It includes a Single Message Transform (SMT) that routes the outbox event to the value of the destination field in the outbox event database table.
+
 ## Component Tests
 
 The component tests treat the application as a black box performing end-to-end testing and proving the deployment and configuration in a local environment.
@@ -34,8 +40,9 @@ Run tests leaving containers up:
 mvn test -Pcomponent -Dcontainers.stayup
 ```
 
-## Debezium (Kafka Connect) Connector
+## Clean Up Commands
 
-The Debezium Postgres source connector configuration is defined in `resources/connector/outbox-connector.json`.
-
-It includes a Single Message Transform (SMT) that routes the outbox event to the value of the destination field in the outbox event database table.
+- Manual clean up (if left containers up):
+```
+docker rm -f $(docker ps -aq)
+```
