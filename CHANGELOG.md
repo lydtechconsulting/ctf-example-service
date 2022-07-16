@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.6.0] - 2022-07-16
+### Changed
+- Latest component-test-framework.
+
 ## [1.4.0] - 2022-06-02
 ### Added
 - Supports remote host.
