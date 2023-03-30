@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.0] - 2023-03-30
+### Changed
+- Updated to Spring Boot 3, Kafka Clients 3, Java 17.
+- Updated component-test-framework to 2.x.
+- Updated to Debezium 2.2.
+
 ## [1.6.0] - 2022-07-16
 ### Changed
 - Latest component-test-framework.

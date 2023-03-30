@@ -8,7 +8,6 @@
         "database.user": "user",
         "database.password": "password",
         "database.dbname" : "postgres-db",
-        "database.server.name": "ctf-example-server",
         "table.include.list": "ctf_example.outbox_event",
         "transforms": "outbox",
         "transforms.outbox.predicate": "IsOutboxTable",
@@ -17,6 +16,7 @@
         "transforms.outbox.route.topic.replacement": "${routedByValue}",
         "predicates": "IsOutboxTable",
         "predicates.IsOutboxTable.type": "org.apache.kafka.connect.transforms.predicates.TopicNameMatches",
-        "predicates.IsOutboxTable.pattern": "ctf_example.outbox_event"
+        "predicates.IsOutboxTable.pattern": "ctf_example.outbox_event",
+        "topic.prefix": "ctf-example-server"
     }
 }

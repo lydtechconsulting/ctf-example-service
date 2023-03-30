@@ -22,7 +22,7 @@ public class CtfExampleConsumer {
     final CtfExampleService ctfExampleService;
 
     @KafkaListener(topics = "ctf-example-inbound-topic", groupId = "kafkaConsumerGroup", containerFactory = "kafkaListenerContainerFactory")
-    public void listen(@Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key, @Payload final String payload) {
+    public void listen(@Header(KafkaHeaders.RECEIVED_KEY) String key, @Payload final String payload) {
         counter.getAndIncrement();
         log.debug("Received message [" +counter.get()+ "] - key: " + key + " - payload: " + payload);
         try {
