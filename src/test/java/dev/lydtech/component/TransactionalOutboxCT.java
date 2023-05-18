@@ -38,6 +38,7 @@ public class TransactionalOutboxCT {
 
     @BeforeEach
     public void setup() {
+        WiremockClient.getInstance().deleteAllRequestsMappings();
         consumer = KafkaClient.getInstance().createConsumer(GROUP_ID, OUTBOUND_TOPIC);
         DebeziumClient.getInstance().createConnector("connector/outbox-connector.json");
         // Clear the topic.
