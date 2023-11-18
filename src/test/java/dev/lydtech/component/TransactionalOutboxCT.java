@@ -8,7 +8,7 @@ import dev.lydtech.component.framework.client.debezium.DebeziumClient;
 import dev.lydtech.component.framework.client.kafka.KafkaClient;
 import dev.lydtech.component.framework.client.wiremock.RequestCriteria;
 import dev.lydtech.component.framework.client.wiremock.WiremockClient;
-import dev.lydtech.component.framework.extension.TestContainersSetupExtension;
+import dev.lydtech.component.framework.extension.ComponentTestExtension;
 import dev.lydtech.component.framework.mapper.JsonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.Consumer;
@@ -27,7 +27,7 @@ import static org.hamcrest.Matchers.containsString;
  * Demonstrates the Transactional Outbox pattern.
  */
 @Slf4j
-@ExtendWith(TestContainersSetupExtension.class)
+@ExtendWith(ComponentTestExtension.class)
 public class TransactionalOutboxCT {
 
     private static final String GROUP_ID = "TransactionalOutboxCT";

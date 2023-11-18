@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0] - 2023-11-18
+### Changed
+- Updated Testcontainers version to 1.19.2
+- Environment variable TESTCONTAINERS_REUSE_ENABLE replaces TESTCONTAINERS_RYUK_DISABLED
+- ComponentTestExtension replaces the deprecated TestContainersSetupExtension
+- Updated to Spring Boot 3.1
+
 ## [2.0.0] - 2023-03-30
 ### Changed
 - Updated to Spring Boot 3, Kafka Clients 3, Java 17.
