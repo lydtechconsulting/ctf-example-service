@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>dev.lydtech</groupId>
 			<artifactId>component-test-framework</artifactId>
-			<version>2.6.0</version>
+			<version>2.13.0</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -64,7 +64,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.3.1</version>
+			<version>42.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
@@ -168,6 +168,7 @@
 								<wiremock.enabled>true</wiremock.enabled>
 								<wiremock.image.tag>2.35.0</wiremock.image.tag>
 								<wiremock.port>8080</wiremock.port>
+								<wiremock.mapped.port>8080</wiremock.mapped.port>
 								<wiremock.container.logging.enabled>false</wiremock.container.logging.enabled>
 							</systemPropertyVariables>
 						</configuration>

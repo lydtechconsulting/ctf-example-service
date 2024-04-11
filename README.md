@@ -46,3 +46,9 @@ mvn test -Pcomponent -Dcontainers.stayup
 ```
 docker rm -f $(docker ps -aq)
 ```
+
+
+## notes / issues
+Intermittent mac issue - 'File not found' when starting containers
+If the containers do not start it's always worth checking that the file `/var/run/docker.sock` exists.   If the file does not exist, recreate it via``
+`sudo ln -s ~/.docker/run/docker.sock /var/run/docker.sock`
