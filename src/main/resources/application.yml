@@ -22,9 +22,6 @@ kafka:
         # Default to 30 seconds
         maxPollIntervalMs: 30000
 
-server:
-    port: 9001
-
 ctfexample:
     thirdpartyEndpoint: https://ctf.example.com/api/thirdparty/
     outboundTopic : "ctf-example-outbound-topic"
