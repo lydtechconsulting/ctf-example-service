@@ -1,5 +1,8 @@
 # Changelog
 
+## [3.3.0] - 2024-06-12
+- Updated component-test-framework to 3.3.0.
+- 
 ## [2.6.0] - 2023-11-18
 ### Changed
 - Updated Testcontainers version to 1.19.2
